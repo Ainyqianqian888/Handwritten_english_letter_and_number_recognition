@@ -56,7 +56,8 @@ def ResNet_inference(input_shape, n_classes, dropout):
     #  2000*20steps开始过拟合
     return res_net_model
 ```
-
+## 项目演示
+老师，不好意思，服务器需要花钱，在本地搭建的
 ![demogif](https://github.com/Ainyqianqian888/Handwritten_english_letter_and_number_recognition/blob/master/demo.gif) <br>
 
 ## 加载模型
