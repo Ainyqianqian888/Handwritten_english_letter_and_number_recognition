@@ -58,7 +58,7 @@ def ResNet_inference(input_shape, n_classes, dropout):
 ```
 
 ## 加载模型
-项目采用‘https://github.com/Ainyqianqian888/Handwritten_english_letter_and_number_recognition/tree/master’所训练的模型，详细原理可参考该链接，训练好的模型保存在checkpoint文件夹中。
+项目采用https://github.com/Ainyqianqian888/Handwritten_english_letter_and_number_recognition/tree/master 所训练的模型，详细原理可参考该链接，训练好的模型保存在checkpoint文件夹中。
 
 
 ## 环境
