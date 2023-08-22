@@ -96,8 +96,6 @@ def predict(model, img_f):
     return characters[np.argmax(result[0])]
 
 
-
-
 def createImage(predword,imagepath):
     im = Image.new("RGB", (64, 64), (255, 255, 255))
     dr = ImageDraw.Draw(im)
@@ -108,8 +106,13 @@ def createImage(predword,imagepath):
 @app.route('/')
 @app.route('/index')
 def index():
+    global __global_times
     global model
-    model = predictPrepare()  # 加载模型，准备好预测
+    if (__global_times == 0):
+        model = predictPrepare()  # 加载模型，准备好预测
+        __global_times = 1
+    else:
+        pass
     return render_template("index.html",title='Home')
 
 @app.route('/chineseRecognize',methods=['POST'])
@@ -122,26 +125,17 @@ def chineseRecognize():
     file = open(__test_image_file, 'wb')
     file.write(img)
     file.close()
-    global __global_times
-    if (__global_times == 0):
 
-        # temp_image = imagePrepare(__test_image_file)
-        # a = cv2.imread(__test_image_file)
-        # cv2.imshow('monitor', a)
-        # cv2.moveWindow("monitor", 960, 540)
-        predict_word = predict(model, __test_image_file)
-        # with open(__code_to_chinese_file, 'rb') as f2:
-        #     word_dict = pickle.load(f2) # 汉字和编码对照字典
-        createImage(predict_word, __pred1_image_file) # 生成准确率top1的汉字图片
+    predict_word = predict(model, __test_image_file)
+    createImage(predict_word, __pred1_image_file) # 生成准确率top1的图片
         # createImage(word_dict[predict_index[0][1]], __pred2_image_file)
         # createImage(word_dict[predict_index[0][2]], __pred3_image_file)
-        __global_times = 1
-    else:
+    # else:
         # a = cv2.imread(__test_image_file)
         # cv2.imshow('monitor', a)
         # cv2.moveWindow("monitor", 960, 540)
-        predict_word = predict(model, __test_image_file)
-        createImage(predict_word, __pred1_image_file)
+        # predict_word = predict(model, __test_image_file)
+        # createImage(predict_word, __pred1_image_file)
         # createImage(word_dict[predict_index[0][1]], __pred2_image_file)
         # createImage(word_dict[predict_index[0][2]], __pred3_image_file)
 
