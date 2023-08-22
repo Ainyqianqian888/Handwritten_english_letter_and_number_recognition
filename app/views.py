@@ -108,6 +108,8 @@ def createImage(predword,imagepath):
 @app.route('/')
 @app.route('/index')
 def index():
+    global model
+    model = predictPrepare()  # 加载模型，准备好预测
     return render_template("index.html",title='Home')
 
 @app.route('/chineseRecognize',methods=['POST'])
@@ -122,12 +124,11 @@ def chineseRecognize():
     file.close()
     global __global_times
     if (__global_times == 0):
-        global model
-        model = predictPrepare() #加载模型，准备好预测
+
         # temp_image = imagePrepare(__test_image_file)
-        a = cv2.imread(__test_image_file)
-        cv2.imshow('monitor', a)
-        cv2.moveWindow("monitor", 960, 540)
+        # a = cv2.imread(__test_image_file)
+        # cv2.imshow('monitor', a)
+        # cv2.moveWindow("monitor", 960, 540)
         predict_word = predict(model, __test_image_file)
         # with open(__code_to_chinese_file, 'rb') as f2:
         #     word_dict = pickle.load(f2) # 汉字和编码对照字典
@@ -136,9 +137,9 @@ def chineseRecognize():
         # createImage(word_dict[predict_index[0][2]], __pred3_image_file)
         __global_times = 1
     else:
-        a = cv2.imread(__test_image_file)
-        cv2.imshow('monitor', a)
-        cv2.moveWindow("monitor", 960, 540)
+        # a = cv2.imread(__test_image_file)
+        # cv2.imshow('monitor', a)
+        # cv2.moveWindow("monitor", 960, 540)
         predict_word = predict(model, __test_image_file)
         createImage(predict_word, __pred1_image_file)
         # createImage(word_dict[predict_index[0][1]], __pred2_image_file)

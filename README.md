@@ -1,29 +1,15 @@
 # TensorFlow 2 EMNIST数据集上的ResNet字母数字识别模型
-本项目在window10 + tf2.1 + python3.7环境下运行良好。可供tf2入门学习。
+本项目在window11 + tensorflow2.1 + python3.7环境下运行良好。可供tf2入门学习。
 
-## 数据准备
+## 数据集
 
 数据全部来自于TF官网收录的EMNIST数据集：
 - https://tensorflow.google.cn/datasets/catalog/emnist?hl=en
 - emnist/byclass (default config)：本项目使用默认的62分类数据集，分别为10个数字，26个大小写字母（10+26+26），训练集697932个，测试集116323个
 
-读取（路径没有数据则自动下载）数据集：
-```python
-(ds_train, ds_test), ds_info = tfds.load(
-    'emnist',
-    split=['train', 'test'],
-    data_dir='./tensorflow_datasets',
-    shuffle_files=True,
-    as_supervised=True,
-    with_info=True,
-) 
-```
-这部分在mytrain.py，参考自官方文档https://tensorflow.google.cn/datasets/keras_example
+## ResNet
 
-
-## 模型构建
-
-使用keras构建了4个CNN模型分别做测试，最后选用了效果最好的ResNet，模型构建写在model.py。
+采用ResNet模型进行训练，模型构建写在model.py中。
 
 
 ```python
@@ -71,46 +57,30 @@ def ResNet_inference(input_shape, n_classes, dropout):
     return res_net_model
 ```
 
+![demogif](https://github.com/Ainyqianqian888/Handwritten_english_letter_and_number_recognition/tree/master/demo.gif) <br>
+
+## 加载模型
+项目采用https://github.com/Ainyqianqian888/Handwritten_english_letter_and_number_recognition/tree/master所训练的模型，详细原理可参考该链接，训练好的模型保存在checkpoint文件夹中。
 
 
-## 训练模型
+##环境
+- python               3.7.7
+- alfred               0.3                
+- alfred-py            3.0.7                          
+- Flask                2.2.5
+- numpy                1.21.6     
+- opencv-python        4.8.0.76                      
+- rich                 13.5.2            
+- tensorflow           2.1.0
 
-- 使用keras.models.fit来训练模型
-```python
-callbacks = [
-        tf.keras.callbacks.ModelCheckpoint(ckpt_path,
-                                            save_weights_only=True,
-                                            verbose=1,
-                                            period=SAVE_PERIOD),
-        tf.keras.callbacks.TensorBoard(log_dir, write_graph=True, write_images=True)
-    ]
-```
+##模型部署
+&nbsp;&nbsp;&nbsp; 使用`python+flask`搭建的一个网站，然后从网页的写字板上获取鼠标手写的字母或数字经过转码后传回后台，并经过图片裁剪处理之后传入`ResNet`模型中进行识别，最后通过`PIL`将识别结果生成图片，最后异步回传给web端进行识别结果展示。 
+这里对英文字母和数字总共`36`个字进行识别。   
+<br>
+![demogif](https://github.com/taosir/cnn_handwritten_chinese_recognition/blob/master/cnn_handwrite_chinese_recognize.gif) <br>
 
-运行mytrain.py开始训练，会自动下载数据集（根目录生成tensorflow_datasets文件夹）
-
-- 使用tf.keras.callbacks.ModelCheckpoint实现训练中自动保存。
-- 支持断点续训，退出时直接保存模型，再次训练会读取最近保存的weight。
-- TensorBoard用于实时监测训练情况，根目录下命令行输入tensorboard --logdir=tblogs,按提示打开浏览器查看
-
-数据集较大，建议使用GPU训练。
-
-### tensorboard查看训练20轮后的情况：
-![Image text](https://github.com/JiJiFlyer/tf2_emnist_test/blob/master/imgs/20epochs.png)
-
-
-
-## 模型测试
-将待识别图片放入assets（支持白底彩字），运行demo.py即可，默认识别PNG，想识别jpg修改一下demo.py就可以
-```python
-if __name__ == '__main__':
-    img_files = glob.glob('assets/*.png')
-    model = get_model()
-    for img_f in img_files:
-        a = cv2.imread(img_f)
-        cv2.imshow('monitor', a)
-        cv2.moveWindow("monitor",960,540)
-        predict(model, img_f)
-        cv2.waitKey(0)
-```
-运行时会逐一弹窗，并打印识别的字，文件夹中会生成由字母本身命名的图片。
-![Image text](https://github.com/JiJiFlyer/tf2_emnist_test/blob/master/imgs/demo.png)
+## 五、运行
+ 1、下载项目代码，安装项目所需的库；<br>
+ 2、使用`python run.py`运行；<br>
+ 4、打开本地浏览器输入`localhost:5000`进行查看；<br>
+ 
