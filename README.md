@@ -1,5 +1,5 @@
 # TensorFlow 2 EMNIST数据集上的ResNet字母数字识别模型
-本项目在window11 + tensorflow2.1 + python3.7环境下运行良好。可供tf2入门学习。
+本项目在window11 + tensorflow2.1 + python3.7环境下运行良好。是对Resnet在识别手写英文字母和数字场景下的的部署。
 
 ## 数据集
 
