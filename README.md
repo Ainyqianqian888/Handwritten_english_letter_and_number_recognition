@@ -56,9 +56,6 @@ def ResNet_inference(input_shape, n_classes, dropout):
     #  2000*20steps开始过拟合
     return res_net_model
 ```
-## 项目演示
-老师，不好意思，服务器需要花钱，在本地搭建的
-![demogif](https://github.com/Ainyqianqian888/Handwritten_english_letter_and_number_recognition/blob/master/demo.gif) <br>
 
 ## 加载模型
 项目采用https://github.com/Ainyqianqian888/Handwritten_english_letter_and_number_recognition/tree/master所训练的模型，详细原理可参考该链接，训练好的模型保存在checkpoint文件夹中。
@@ -77,8 +74,8 @@ def ResNet_inference(input_shape, n_classes, dropout):
 ##模型部署
 &nbsp;&nbsp;&nbsp; 使用`python+flask`搭建的一个网站，然后从网页的写字板上获取鼠标手写的字母或数字经过转码后传回后台，并经过图片裁剪处理之后传入`ResNet`模型中进行识别，最后通过`PIL`将识别结果生成图片，最后异步回传给web端进行识别结果展示。 
 这里对英文字母和数字总共`36`个字进行识别。   
-<br>
-![demogif](https://github.com/taosir/cnn_handwritten_chinese_recognition/blob/master/cnn_handwrite_chinese_recognize.gif) <br>
+<br>老师，不好意思，服务器需要花钱，在本地搭建的
+![demogif](https://github.com/Ainyqianqian888/Handwritten_english_letter_and_number_recognition/blob/master/demo.gif) <br>
 
 ## 五、运行
  1、下载项目代码，安装项目所需的库；<br>
