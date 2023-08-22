@@ -57,7 +57,7 @@ def ResNet_inference(input_shape, n_classes, dropout):
     return res_net_model
 ```
 
-![demogif](https://github.com/Ainyqianqian888/Handwritten_english_letter_and_number_recognition/tree/master/demo.gif) <br>
+![demogif](https://github.com/Ainyqianqian888/Handwritten_english_letter_and_number_recognition/blob/master/demo.gif) <br>
 
 ## 加载模型
 项目采用https://github.com/Ainyqianqian888/Handwritten_english_letter_and_number_recognition/tree/master所训练的模型，详细原理可参考该链接，训练好的模型保存在checkpoint文件夹中。
