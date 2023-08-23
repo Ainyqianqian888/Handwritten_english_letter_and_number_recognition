@@ -1,5 +1,5 @@
-# TensorFlow 2 EMNIST数据集上的ResNet字母数字识别模型
-本项目在window11 + tensorflow2.1 + python3.7环境下运行良好。可供tf2入门学习。
+# TensorFlow 2 EMNIST数据集上的ResNet手写字母数字识别模型
+本项目是对Resnet在识别手写英文字母和数字场景下的的部署。
 
 ## 数据集
 
@@ -58,7 +58,7 @@ def ResNet_inference(input_shape, n_classes, dropout):
 ```
 
 ## 加载模型
-项目采用https://github.com/Ainyqianqian888/Handwritten_english_letter_and_number_recognition/tree/master所训练的模型，详细原理可参考该链接，训练好的模型保存在checkpoint文件夹中。
+项目采用https://github.com/Ainyqianqian888/Handwritten_english_letter_and_number_recognition/tree/master 所训练的模型，详细原理可参考该链接，训练好的模型保存在checkpoint文件夹中。
 
 
 ## 环境
@@ -74,11 +74,11 @@ def ResNet_inference(input_shape, n_classes, dropout):
 ## 模型部署
 使用`python+flask`搭建的一个网站，然后从网页的写字板上获取鼠标手写的字母或数字经过转码后传回后台，并经过图片裁剪处理之后传入`ResNet`模型中进行识别，最后通过`PIL`将识别结果生成图片，最后异步回传给web端进行识别结果展示。 
 这里对英文字母和数字总共`36`个字进行识别。   
-<br>老师，不好意思，服务器需要花钱，在本地搭建的
+<br>老师，不好意思，目前在本地搭建的
 ![demogif](https://github.com/Ainyqianqian888/Handwritten_english_letter_and_number_recognition/blob/master/demo.gif) <br>
 
 ## 运行
  1、下载项目代码，安装项目所需的库；<br>
- 2、使用`python run.py`运行；<br>
+ 2、运行`python run.py`；<br>
  4、打开本地浏览器输入`localhost:5000`进行查看；<br>
  
