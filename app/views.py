@@ -94,11 +94,14 @@ def predict(model, img_f):
 
 
 def createImage(predword,imagepath):
-    im = Image.new("RGB", (64, 64), (255, 255, 255))
-    dr = ImageDraw.Draw(im)
-    fonts = ImageFont.truetype("app/static/fonts/msyh.ttc",36,encoding='utf-8')
-    dr.text((15, 10), predword,font=fonts,fill="#000000")
-    im.save(imagepath)
+    if predword=='1':
+        __pred1_image_file=r'app/assets/pred_1.png'
+    else:
+        im = Image.new("RGB", (64, 64), (255, 255, 255))
+        dr = ImageDraw.Draw(im)
+        fonts = ImageFont.truetype("app/static/fonts/msyh.ttc", 36, encoding='utf-8')
+        dr.text((15, 10), predword, font=fonts, fill="#000000")
+        im.save(imagepath)
 
 @app.route('/')
 @app.route('/index')
@@ -137,6 +140,7 @@ def chineseRecognize():
         # createImage(word_dict[predict_index[0][2]], __pred3_image_file)
 
     # 将识别图片转码传给前端，并带上对应的准确率
+    # __pred1_image_file = 'app/assets/pred_{}.png'.format(predict_word)
     with open(__pred1_image_file, 'rb') as fin:
         image1_data = fin.read()
         pred1_image = base64.b64encode(image1_data)

@@ -136,8 +136,8 @@ DrawingBoard.Board.prototype = {
 		this.blankCanvas = this.getImg();
 		
 		this.ev.trigger('board:reset', opts);
-		resetTinyBoard();
-		// updateTinyBoard();
+		//resetTinyBoard();
+		updateTinyBoard();
 	},
 
 	resetBackground: function(background, historize) {
